@@ -3,10 +3,6 @@ package com.driver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.*;
 
 @Repository
@@ -33,7 +29,7 @@ public class OrderRepository
         List<Order>orderList=orderPartnerMap.getOrDefault(partnerId,new ArrayList<>());
         orderList.add(orderStuff.get(orderId));
 
-        //I'll have to increase the no. of orders to the partner..
+        //I'll have to increase the no. of orders to the partner.
         DeliveryPartner partner=deliveryPartnerMap.getOrDefault(partnerId,new DeliveryPartner(partnerId));
         partner.setNumberOfOrders(partner.getNumberOfOrders()+1);
 
@@ -77,8 +73,8 @@ public class OrderRepository
         for(String key:deliveryPartnerMap.keySet()){
             count+=deliveryPartnerMap.get(key).getNumberOfOrders();
         }
-        Integer integer = totalOrder - count;
-        return integer;
+
+        return totalOrder - count;
     }
 
     public  Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId)
@@ -111,8 +107,11 @@ public class OrderRepository
 
     public void deletePartnerById(String partnerId)
     {
-        deliveryPartnerMap.remove(partnerId);
-        orderPartnerMap.remove(partnerId);
+        if(orderPartnerMap.containsKey(partnerId))
+        {
+            deliveryPartnerMap.remove(partnerId);
+            orderPartnerMap.remove(partnerId);
+        }
     }
 
     public void deleteOrderById(String orderId)

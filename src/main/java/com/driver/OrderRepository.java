@@ -14,12 +14,14 @@ public class OrderRepository
     Map<String,DeliveryPartner>deliveryPartnerMap=new HashMap<>();
     public ResponseEntity<String> addOrder(Order order)
     {
+        if(order==null)return new ResponseEntity<>("New order added successfully",HttpStatus.CREATED);
         orderStuff.put(order.getId(),order);
         return  new ResponseEntity<>("New order added successfully",HttpStatus.CREATED);
     }
 
     public ResponseEntity<String> addPartner(String partnerId)
     {
+        if(partnerId==null)return new ResponseEntity<>("New partner added successfully",HttpStatus.OK);
         deliveryPartnerMap.put(partnerId,new DeliveryPartner(partnerId));
         return new ResponseEntity<>("New partner added successfully",HttpStatus.CREATED);
     }

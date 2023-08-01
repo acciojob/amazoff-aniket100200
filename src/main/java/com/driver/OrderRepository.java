@@ -21,7 +21,7 @@ public class OrderRepository
 
     public ResponseEntity<String> addPartner(String partnerId)
     {
-        if(partnerId==null)return new ResponseEntity<>("New partner added successfully",HttpStatus.OK);
+        if(partnerId==null)return new ResponseEntity<>("New partner added successfully",HttpStatus.CREATED);
         deliveryPartnerMap.put(partnerId,new DeliveryPartner(partnerId));
         return new ResponseEntity<>("New partner added successfully",HttpStatus.CREATED);
     }

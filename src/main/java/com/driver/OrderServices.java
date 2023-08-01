@@ -11,7 +11,7 @@ import java.util.List;
 public class OrderServices
 {
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderRepository orderRepository=new OrderRepository();
     public ResponseEntity<String>addOrder(Order order)
     {
         return orderRepository.addOrder(order);

@@ -12,9 +12,9 @@ public class OrderServices
 {
     @Autowired
     private OrderRepository orderRepository=new OrderRepository();
-    public ResponseEntity<String>addOrder(Order order)
+    public void addOrder(Order order)
     {
-        return orderRepository.addOrder(order);
+         orderRepository.addOrder(order);
 }
 
     public ResponseEntity<String>addPartner(String partnerId){

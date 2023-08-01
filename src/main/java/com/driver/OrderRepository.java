@@ -12,11 +12,11 @@ public class OrderRepository
     Map<String, List<Order>>orderPartnerMap=new HashMap<>();
 
     Map<String,DeliveryPartner>deliveryPartnerMap=new HashMap<>();
-    public ResponseEntity<String> addOrder(Order order)
+    public void addOrder(Order order)
     {
-        if(order==null)return new ResponseEntity<>("New order added successfully",HttpStatus.CREATED);
+        if(order==null)return;
         orderStuff.put(order.getId(),order);
-        return  new ResponseEntity<>("New order added successfully",HttpStatus.CREATED);
+
     }
 
     public ResponseEntity<String> addPartner(String partnerId)

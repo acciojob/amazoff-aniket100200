@@ -1,5 +1,8 @@
 package com.driver;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +35,9 @@ private OrderServices orderServices=new OrderServices();
     @PostMapping("/add-partner/{partnerId}")
     public ResponseEntity<String> addPartner(@PathVariable String partnerId)
     {
+        String ans=orderServices.addPartner(partnerId);
 
-        return orderServices.addPartner(partnerId);
+        return new ResponseEntity<>(ans,HttpStatus.CREATED);
     }
 
     @PutMapping("/add-order-partner-pair")

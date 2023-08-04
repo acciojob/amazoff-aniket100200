@@ -17,7 +17,7 @@ public class OrderServices
          orderRepository.addOrder(order);
 }
 
-    public ResponseEntity<String>addPartner(String partnerId){
+    public String addPartner(String partnerId){
         return orderRepository.addPartner(partnerId);
     }
 

@@ -19,11 +19,10 @@ public class OrderRepository
 
     }
 
-    public ResponseEntity<String> addPartner(String partnerId)
+    public String addPartner(String partnerId)
     {
-        if(partnerId==null)return new ResponseEntity<>("New partner added successfully",HttpStatus.CREATED);
         deliveryPartnerMap.put(partnerId,new DeliveryPartner(partnerId));
-        return new ResponseEntity<>("New partner added successfully",HttpStatus.CREATED);
+        return "New partner added successfully";
     }
 
     public ResponseEntity<String> addOrderToPartner(String orderId,String partnerId)
@@ -36,7 +35,7 @@ public class OrderRepository
         partner.setNumberOfOrders(partner.getNumberOfOrders()+1);
 
         orderPartnerMap.put(partnerId,orderList);
-        return new ResponseEntity<>("New order-partner pair added successfully", HttpStatus.OK);
+        return new ResponseEntity<>("New order-partner pair added successfully", HttpStatus.CREATED);
     }
 
     public Order getOrderById(String orderId)
@@ -99,10 +98,18 @@ public class OrderRepository
     public String  getLastDeliveryTimeByPartnerId(String partnerId)
     {
         List<Order>list=orderPartnerMap.get(partnerId);
-        if(list.size()==0)return "00:00";
-        Integer time=list.get(list.size()-1).getDeliveryTime();
+        int last=Integer.MIN_VALUE;
+        for(Order order:list)
+        {
+            int time=order.getDeliveryTime();
+            if(time>last)last=time;
+        }
+       int time=last;
         int HH=time/60;
         int MM=time%60;
+        if(HH<10 && MM<10)return "0"+HH+":0"+MM;
+        else if(HH<10)return "0"+HH+":"+MM;
+        else if(MM<10)return ""+HH+":0"+MM;
         return ""+HH+":"+MM;
     }
 

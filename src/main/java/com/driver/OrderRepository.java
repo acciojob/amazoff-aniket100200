@@ -22,7 +22,7 @@ public class OrderRepository
     public String addPartner(String partnerId)
     {
         deliveryPartnerMap.put(partnerId,new DeliveryPartner(partnerId));
-        return "New partner added successfully";
+        return "New delivery partner added successfully";
     }
 
     public ResponseEntity<String> addOrderToPartner(String orderId,String partnerId)
